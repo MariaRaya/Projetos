@@ -9,10 +9,12 @@ function preload(){  //Carrega a imagem
 function setup(){
   createCanvas(400,400);
 
+// Estrada
   path = createSprite(197,200,400,600);
   path.addImage("ground",pathImage);
   path.scale = 0.8;
 
+// Atleta
   runner = createSprite(200,350,20,50);
   runner.addAnimation("running", runnerImage); 
   runner.scale = 0.05;
@@ -25,11 +27,12 @@ function draw(){
   //definir a cor do plano de fundo 
   background(rgb(35, 94, 47));
 
-  path.velocityY = -2;
-  if(path.y < 0){
+  path.velocityY = 2;  //Movimento da estrada
+  if(path.y > 400){
     path.y = path.height / 5;
   } 
 
+// Movimento do atleta
   if(keyDown(RIGHT_ARROW)){
     runner.x = runner.x + 1;
   }
