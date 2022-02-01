@@ -14,28 +14,29 @@ backgroundImg = loadImage("fundo.jpg");
 naveImg = loadImage("nave.png");
 meteoro1 = loadImage("meteoro4.png");
 meteoro2 = loadImage("meteoro3.png");
-balaImg = loadImage("bala.png");
 fimJogoImg = loadImage("gameOver.png");
 }
 
 function setup() {
     createCanvas(1100,800);
- 
+    
+    // Criando imagem de fundo
     background_ = createSprite(900,300,626,375);
     background_.addImage(backgroundImg);
     background_.scale = 3;
     
-
+    // Criando nave
     nave = createSprite(100, 400, 50,50);
     nave.addImage(naveImg);
     nave.scale = 0.2;
 
+    // Imagem do fim do jogo
     fimJogo = createSprite(550,400,50,50);
     fimJogo.addImage(fimJogoImg);
 
     meteoroGroup = new Group;
   
-
+    // Bordas 
     invisableGround = createSprite(50,10,width*2,20);
     invisableGround1 = createSprite(50,790,width*2,20);
     invisableGround1.visible = false;
@@ -53,10 +54,11 @@ function draw() {
     if(estadoJogo == PLAY){
 
         fimJogo.visible = false;
-        nave.velocityX = -2;
+        nave.velocityX = -1;
 
+        // Movimento da nave
         if(keyDown("space")){
-            nave.x = nave.x + 4;
+            nave.x = nave.x + 2;
         }
 
         if(keyDown("UP_ARROW")){
@@ -70,7 +72,7 @@ function draw() {
         obstaculos();
     }
     
-
+    //Condições para o fim do Jogo
     if(nave.isTouching(meteoroGroup) || nave.x < 0 ||nave.isTouching(invisableGround) || nave.isTouching(invisableGround1)){
         nave.velocityX = 0;
         nave.velocityY = 0;
@@ -91,7 +93,7 @@ function draw() {
     drawSprites();
 }
 
-function obstaculos(){
+function obstaculos(){   // Criando obstáculos 
     if (frameCount % 100 == 0){
 
         var posY = Math.round(random(100,750));
